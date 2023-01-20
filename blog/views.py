@@ -13,6 +13,7 @@ class BlogListView(View):
         return render(request, 'blog_list.html', context)
 
 class BlogCreateView(View):
+
     def get(self, request, *args, **kwargs):
         form=PostCreateForm()
         context={
@@ -35,3 +36,11 @@ class BlogCreateView(View):
         context={
         }
         return render(request, 'blog_create.html', context)
+
+class BlogDetailView(View):
+    def get(self, request, pk, *args, **kwargs):
+        post = get_object_or_404(Post, pk=pk)
+        context={
+            'post':post
+        }
+        return render(request, 'blog_detail.html', context)
